@@ -1,0 +1,8 @@
+public class UserSignRequestModel
+{
+    public string FirstName { get; set; }
+    public string LastName{ get; set; }
+    public string UserName { get; init; }
+    public string Email { get; init; }
+    public string Password{ get; init; }
+}
