@@ -27,5 +27,11 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+WebApplication app = builder.Build();
 
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    DatabaseContext dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    dbContext.Database.EnsureCreated();
+}
 
