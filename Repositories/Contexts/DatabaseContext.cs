@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using userJwtApp.Models.ProductModel;
 using userJwtApp.Models.UserModel;
 
-namespace userJwtApp.Respositories.Contexts;
+namespace userJwtApp.Repositories.Contexts;
 
 public class DatabaseContext : DbContext
 {
-    public DbSet<ProductModel> product { get; set; } = null!;
-    public DbSet<UserModel> user { get; set; } = null!;
+    public DbSet<ProductModel> Product { get; set; } = null!;
+    public DbSet<UserModel> User { get; set; } = null!;
 }

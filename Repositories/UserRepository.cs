@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using userJwtApp.Models.UserModel;
-using userJwtApp.Respositories;
-using userJwtApp.Respositories.Contexts;
+using userJwtApp.Repositories;
+using userJwtApp.Repositories.Contexts;
 
 public class UserRepository : IUserInterface
 {
@@ -13,14 +13,14 @@ public class UserRepository : IUserInterface
     }
 
     public async Task<UserModel> RegisterUser(UserModel user) =>
-        (await dbContext.user.AddAsync(user)).Entity;
+        (await dbContext.User.AddAsync(user)).Entity;
 
 
     public async Task<UserModel> GetUserById(int userId) =>
-        (await dbContext.user.FindAsync(userId));
+        (await dbContext.User.FindAsync(userId));
 
     public async Task<UserModel> GetUserByUserName(string username) =>
-        await dbContext.user.FirstOrDefaultAsync(user => user.UserName == username);
+        await dbContext.User.FirstOrDefaultAsync(user => user.UserName == username);
 
     public async Task FlushChanges() =>
         await dbContext.SaveChangesAsync();

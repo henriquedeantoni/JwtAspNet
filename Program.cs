@@ -1,4 +1,4 @@
-using userJwtApp.Respositories.Contexts;
+using userJwtApp.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -34,4 +34,8 @@ using (IServiceScope scope = app.Services.CreateScope())
     DatabaseContext dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
     dbContext.Database.EnsureCreated();
 }
+
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ProductRepository>();
+
 
