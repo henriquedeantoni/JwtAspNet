@@ -1,8 +1,18 @@
 using userJwtApp.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+
+using ILogger = Serilog.ILogger;
+
+ILogger logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+builder.Host.UseSerilog(logger);
 
 /*
 // Add services to the container.
