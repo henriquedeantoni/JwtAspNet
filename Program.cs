@@ -1,11 +1,18 @@
+using System;
+using System.Text;
 using userJwtApp.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using DotNetEnv;
+
 
 using ILogger = Serilog.ILogger;
 using FluentValidation;
 using userJwtApp.Validators.UserValidators;
 using userJwtApp.Validators.ProductValidators;
+using userJwtApp.Services.Jwt;
+
+Env.Load();
 
 ILogger logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -55,3 +62,10 @@ builder.Services.AddScoped<IValidator<UserSignRequestModel>, UserSignRequestVali
 builder.Services.AddScoped<IValidator<UserLoginRequestModel>, UserLoginRequestValidator>();
 builder.Services.AddScoped<IValidator<ProductRegisterRequestModel>, ProductRegisterRequestValidator>();
 builder.Services.AddScoped<IValidator<ProductUpdateRequestModel>, ProductUpdateRequestValidator>();
+
+builder.Services.AddSingleton<JwtService>(_ =>
+{
+    byte[] byteKey = Encoding.UTF8.GetBytes(JwtConsts.JWT_SIMETRIC_KEY_SHA256);
+
+    return new(byteKey);
+});
