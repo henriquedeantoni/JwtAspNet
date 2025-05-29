@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 using ILogger = Serilog.ILogger;
+using FluentValidation;
+using userJwtApp.Validators.UserValidators;
+using userJwtApp.Validators.ProductValidators;
 
 ILogger logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -48,4 +51,7 @@ using (IServiceScope scope = app.Services.CreateScope())
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<ProductRepository>();
 
-
+builder.Services.AddScoped<IValidator<UserSignRequestModel>, UserSignRequestValidator>();
+builder.Services.AddScoped<IValidator<UserLoginRequestModel>, UserLoginRequestValidator>();
+builder.Services.AddScoped<IValidator<ProductRegisterRequestModel>, ProductRegisterRequestValidator>();
+builder.Services.AddScoped<IValidator<ProductUpdateRequestModel>, ProductUpdateRequestValidator>();
