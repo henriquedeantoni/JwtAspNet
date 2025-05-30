@@ -1,9 +1,11 @@
 using ILogger = Serilog.ILogger;
+using userJwtApp.Services.Jwt;
 using userJwtApp.Repositories;
 using userJwtApp.Models.Controllers;
 using userJwtApp.Validators.UserValidators;
 using userJwtApp.Models.UserModel;
 using FluentValidation;
+using FluentValidation.Results;
 namespace userJwtApp.Controllers;
 
 
@@ -30,19 +32,26 @@ public class UserController : IUserController
 
     public async Task<string> SignUser(UserSignRequestModel signRequest)
     {
-        #region 
-        logger.Information("Validated user signin request");
+        #region Validation
+        Logger.Information("Validated user signin request");
 
-        ValidationResult validationResult = await signinValidator.ValidateAsync(signinRequest);
+        ValidationResult validationResult = await SignValidator.ValidateAsync(signRequest);
         if (!validationResult.IsValid)
         {
             InvalidRequestInfoException invalidRequestInfoException = new(validationResult.Errors)
                 .Select(e => e.ErrorMessage);
-            logger.Error("Invalid user signin request: {InvalidInfoException}", invalidRequestInfoException.Message);
+            Logger.Error("Invalid user signin request: {InvalidInfoException}", invalidRequestInfoException.Message);
             throw invalidInfoException;
         }
         UserModel? allreadyRegisterUser = await repository.GetUserByUsername(signinRequest.Username);
 
+        if (allreadyRegisterUser is not null)
+        {
+            UserAllreadyRegisteredException allreadyRegisteredException = new(signRequest.Username);
+            Logger.Error("User Username [{username}] already registered:{AllreadyRegisteredException}"
+                signRequest.Username, allreadyRegisteredException.Message);
+            throw allreadyRegisteredException;
+        }
         #endregion
     }
 
