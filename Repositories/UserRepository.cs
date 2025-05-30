@@ -20,7 +20,7 @@ public class UserRepository : IUserInterface
         (await dbContext.User.FindAsync(userId));
 
     public async Task<UserModel> GetUserByUserName(string username) =>
-        await dbContext.User.FirstOrDefaultAsync(user => user.UserName == username);
+        await dbContext.User.FirstOrDefaultAsync(user => user.Username == username);
 
     public async Task FlushChanges() =>
         await dbContext.SaveChangesAsync();
