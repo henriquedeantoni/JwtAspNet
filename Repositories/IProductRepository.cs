@@ -1,4 +1,6 @@
 using userJwtApp.Models.ProductModel;
+
+namespace userJwtApp.Repositories;
 public interface IProductRepository
 {
     /// <summary>

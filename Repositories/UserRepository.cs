@@ -3,6 +3,7 @@ using userJwtApp.Models.UserModel;
 using userJwtApp.Repositories;
 using userJwtApp.Repositories.Contexts;
 
+namespace userJwtApp.Repositories;
 public class UserRepository : IUserInterface
 {
     private DatabaseContext dbContext { get; }

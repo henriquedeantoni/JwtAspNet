@@ -1,5 +1,6 @@
 using userJwtApp.Models.UserModel;
 
+namespace userJwtApp.Repositories;
 public interface IUserInterface
 {
     /// <summary>

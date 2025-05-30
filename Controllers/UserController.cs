@@ -1,5 +1,8 @@
 using ILogger = Serilog.ILogger;
+using userJwtApp.Repositories;
 using userJwtApp.Models.Controllers;
+using userJwtApp.Validators.UserValidators;
+using userJwtApp.Models.UserModel;
 using FluentValidation;
 namespace userJwtApp.Controllers;
 
@@ -27,11 +30,26 @@ public class UserController : IUserController
 
     public async Task<string> SignUser(UserSignRequestModel signRequest)
     {
-        throw new NotImplementedException();
+        #region 
+        logger.Information("Validated user signin request");
+
+        ValidationResult validationResult = await signinValidator.ValidateAsync(signinRequest);
+        if (!validationResult.IsValid)
+        {
+            InvalidRequestInfoException invalidRequestInfoException = new(validationResult.Errors)
+                .Select(e => e.ErrorMessage);
+            logger.Error("Invalid user signin request: {InvalidInfoException}", invalidRequestInfoException.Message);
+            throw invalidInfoException;
+        }
+        UserModel? allreadyRegisterUser = await repository.GetUserByUsername(signinRequest.Username);
+
+        #endregion
     }
 
     public async Task<string> LoginUser(UserLoginRequestModel loginRequest)
     {
-        throw new NotImplementedException();
+        #region 
+
+        #endregion
     }
 }
