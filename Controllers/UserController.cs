@@ -105,8 +105,19 @@ public class UserController : IUserController
         }
         if (user.Password != loginRequest.Password)
         {
-            WrongUserPasswordException 
+            WrongUserPasswordException wrongUserPasswordException = new(loginRequest.Username);
+            Logger.Error("Invalid password for user Username[{Username}]:{InvalidPasswordException}",
+                loginRequest.Username, wrongUserPasswordException.Message);
+            throw wrongUserPasswordException;
         }
+        Logger.Information("User logged in Username[{Username}]", loginRequest.Username);
         #endregion
+
+        #region Create JWT
+        Logger.Information("Creating JWT for user Username[{Username}]", loginRequest.Username);
+        string userJwt = JwtService.GenerateToken(user.Id);
+        #endregion
+
+        return userJwt;
     }
 }
