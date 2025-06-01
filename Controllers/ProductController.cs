@@ -130,7 +130,6 @@ public class ProductController : IProductController
         #endregion
 
         #region Update product
-
         if (!hasUpdates)
         {
             Logger.Warning("There are no updates to be made on ID[{Id}]", productModel.Id);

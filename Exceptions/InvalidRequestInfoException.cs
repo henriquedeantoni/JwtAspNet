@@ -1,6 +1,6 @@
 namespace userJwtApp.Exceptions;
 
-public class InvalidRequestInfoException : Exception
+public class InvalidRequestInfoException : System.Exception
 {
     const string MESSAGE_EXCEPTION = "Invalid request parameters: {0}";
 
