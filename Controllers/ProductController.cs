@@ -84,14 +84,14 @@ public class ProductController : IProductController
         }
         #endregion
 
-        #region Get user clients
-            Logger.Information("Getting user ID[{Id}] clients", userId);
-            var userClients = await Repository.GetUserRelatedProducts(userId);
-            var userClientRead = 
-            userClients.Select(ProductReadModel.FromProductModel).ToList();
+        #region Get user products
+            Logger.Information("Getting user ID[{Id}] products", userId);
+            var userProducts = await Repository.GetUserRelatedProducts(userId);
+            var userProductRead = 
+            userProducts.Select(ProductReadModel.FromProductModel).ToList();
         #endregion
     
-    return userClientRead;
+    return userProductRead;
     }
 
     public async Task<int> UpdateProduct(ProductUpdateRequestModel updateRequest, int productId)
@@ -104,7 +104,7 @@ public class ProductController : IProductController
         {
             InvalidRequestInfoException invalidRequestInfoException = new(validationResult.Errors
                 .Select(e => e.ErrorMessage));
-            Logger.Error("Invalid client update request: {InvalidRequestInfoException}", invalidRequestInfoException.Message);
+            Logger.Error("Invalid product update request: {InvalidRequestInfoException}", invalidRequestInfoException.Message);
             throw invalidRequestInfoException;
         }
         ProductModel? productModel = await Repository.GetProductById(productId);
@@ -122,7 +122,7 @@ public class ProductController : IProductController
         Logger.Information("Checking for updates");
         if (productModel.ProductName != updateRequest.ProductName)
         {
-            Logger.Information("Client username changed from {OldUsername} to {NewUsername}",
+            Logger.Information("Product Name changed from {OldProductName} to {NewProductName}",
             productModel.ProductName, updateRequest.ProductName);
             productModel.ProductName = updateRequest.ProductName;
             hasUpdates = true;
@@ -145,7 +145,7 @@ public class ProductController : IProductController
     public async Task<int> DeleteProduct(int productId)
     {
         #region Validation
-        Logger.Information("Validating client ID[{Id}]", productId);
+        Logger.Information("Validating product ID[{Id}]", productId);
         ProductModel? productModel = await Repository.GetProductById(productId);
 
         if (productModel is null)
@@ -163,7 +163,7 @@ public class ProductController : IProductController
         await Repository.FlushChanges();
         #endregion
 
-        Logger.Information("Client ID[{Id}] deleted successfully", deletedProduct.Id);
+        Logger.Information("Product ID[{Id}] deleted successfully", deletedProduct.Id);
         return deletedProduct.Id;
     }
 }

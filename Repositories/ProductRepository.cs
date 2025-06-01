@@ -22,7 +22,7 @@ public class ProductRepository : IProductRepository
     public async Task<IReadOnlyList<ProductModel>> GetUserRelatedProducts(int userId) =>
         await dbContext.Product
             .Where(product => product.CreatedBy.Id == userId)
-            .OrderBy(client => client.Id)
+            .OrderBy(product => product.Id)
             .ToListAsync();
     public ProductModel DeleteProduct(ProductModel productModel) =>
         (dbContext.Product.Remove(productModel)).Entity;
