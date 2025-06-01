@@ -96,7 +96,52 @@ public class ProductController : IProductController
 
     public async Task<int> UpdateProduct(ProductUpdateRequestModel updateRequest, int productId)
     {
-        throw new NotImplementedException();
+        #region Validation
+
+        Logger.Information("Validation product update request");
+        ValidationResult validationResult = await ProductUpdateValidator.ValidateAsync(updateRequest);
+        if (!validationResult.IsValid)
+        {
+            InvalidRequestInfoException invalidRequestInfoException = new(validationResult.Errors
+                .Select(e => e.ErrorMessage));
+            Logger.Error("Invalid client update request: {InvalidRequestInfoException}", invalidRequestInfoException.Message);
+            throw invalidRequestInfoException;
+        }
+        ProductModel? productModel = await Repository.GetProductById(productId);
+        if (productModel is null)
+        {
+            ProductNotFoundException productNotFoundException = new(productId.ToString());
+            Logger.Error("Product ID[{Id}] not found: {InvalidRequestInfoException}", productId, productNotFoundException.Message
+            );
+            throw productNotFoundException;
+        }
+        #endregion
+
+        #region Check for updates
+        bool hasUpdates = false;
+        Logger.Information("Checking for updates");
+        if (productModel.ProductName != updateRequest.ProductName)
+        {
+            Logger.Information("Client username changed from {OldUsername} to {NewUsername}",
+            productModel.ProductName, updateRequest.ProductName);
+            productModel.ProductName = updateRequest.ProductName;
+            hasUpdates = true;
+        }
+        #endregion
+
+        #region Update product
+
+        if (!hasUpdates)
+        {
+            Logger.Warning("There are no updates to be made on ID[{Id}]", productModel.Id);
+            return productModel.Id;
+        }
+        Logger.Information("Updating product ID{Id}", productModel.Id);
+        await Repository.FlushChanges();
+        #endregion
+
+        Logger.Information("Product ID[{Id}] updated successfully", productModel.Id);
+        return productModel.Id;
     }
     public async Task<int> DeleteProduct(int productId)
     {
