@@ -1,4 +1,4 @@
-namespace userJwtApp.Exception;
+namespace userJwtApp.Exceptions;
 
 public class ProductNotFoundException : System.Exception
 {

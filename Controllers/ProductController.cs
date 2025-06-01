@@ -144,6 +144,26 @@ public class ProductController : IProductController
     }
     public async Task<int> DeleteProduct(int productId)
     {
-        throw new NotImplementedException();
+        #region Validation
+        Logger.Information("Validating client ID[{Id}]", productId);
+        ProductModel? productModel = await Repository.GetProductById(productId);
+
+        if (productModel is null)
+        {
+            ProductNotFoundException productNotFoundException = new(productId.ToString());
+            Logger.Error("Product ID[{Id}] not found: {InvalidRequestInfoException}",
+                productId, productNotFoundException.Message);
+            throw productNotFoundException;
+        }
+        #endregion
+
+        #region Delete product 
+        Logger.Information("Deleting product ID[{Id}]", productModel.Id);
+        ProductModel deletedProduct = Repository.DeleteProduct(productModel);
+        await Repository.FlushChanges();
+        #endregion
+
+        Logger.Information("Client ID[{Id}] deleted successfully", deletedProduct.Id);
+        return deletedProduct.Id;
     }
 }
