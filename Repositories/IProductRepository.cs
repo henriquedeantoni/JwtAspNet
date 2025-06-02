@@ -12,7 +12,7 @@ public interface IProductRepository
     /// <summary>
     /// Return a product by product Id
     /// </summary>
-    /// <param name="client"></param>
+    /// <param name="product"></param>
     /// <param name=""></param>
     /// <returns></returns>
     public Task<ProductModel> GetProductById(int productId);
@@ -23,7 +23,7 @@ public interface IProductRepository
     /// <returns></returns>
     public Task<IReadOnlyList<ProductModel>> GetUserRelatedProducts(int userId);
     /// <summary>
-    /// Delete some client 
+    /// Delete some product 
     /// </summary>
     /// <param name="productModel"></param>
     /// <returns></returns>

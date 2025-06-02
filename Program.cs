@@ -1,6 +1,8 @@
 using System;
 using System.Text;
 using userJwtApp.Repositories.Contexts;
+using userJwtApp.Controllers;
+using userJwtApp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using DotNetEnv;
@@ -102,4 +104,6 @@ RouteGroupBuilder productGroup = app.MapGroup("Product")
 RouteGroupBuilder userGroup = app.MapGroup("user")
     .AllowAnonymous();
 
+builder.Services.AddScoped<UserController>();
+builder.Services.AddScoped<ProductController>();
 
