@@ -19,11 +19,12 @@ using userJwtApp.Services.Jwt;
 
 Env.Load();
 
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
 ILogger logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
