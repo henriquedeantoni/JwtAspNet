@@ -2,6 +2,7 @@ using userJwtApp.Controllers;
 using userJwtApp.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
+namespace userJwtApp.Endpoints;
 public static class UserEndpoints
 {
     public static RouteGroupBuilder MapUserEndpoints(this RouteGroupBuilder group)
