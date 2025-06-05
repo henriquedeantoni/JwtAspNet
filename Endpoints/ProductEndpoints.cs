@@ -24,7 +24,7 @@ public static class ProductEndpoints
                 }
                 catch (UserNotFoundException ex)
                 {
-                    return Results.BadRequest(ex.Message)
+                    return Results.BadRequest(ex.Message);
                 }
 
                 return Results.Ok(userProducts);
@@ -51,6 +51,46 @@ public static class ProductEndpoints
                 return Results.Created($"client/{newProductId}", newProductId);
             }
         );
+
+        group.MapPut("{id:int}", async (HttpContext context,
+            [FromRoute] int id,
+            [FromServices] ProductController productController,
+            [FromBody] ProductUpdateRequestModel updateRequest) =>
+        {
+
+            int updatedProductId;
+            try
+            {
+                updatedProductId = await productController.UpdateProduct(updateRequest, id);
+            }
+            catch (InvalidRequestInfoException ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
+            catch (ProductNotFoundException ex)
+            {
+                return Results.NotFound(ex.Message);
+            }
+            return Results.Ok(updatedProductId);
+        });
+
+        group.MapDelete("{id:int}", async (HttpContext context,
+            [FromRoute] int id,
+            [FromServices] ProductController productController) =>
+        {
+            int deletedProductId;
+            try
+            {
+                deletedProductId = await productController.DeleteProduct(id);
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
+
+            return Results.Ok(deletedProductId);
+        });
+
         return group;
     }
 }
