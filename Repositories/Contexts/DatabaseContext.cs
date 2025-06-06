@@ -9,5 +9,5 @@ public class DatabaseContext : DbContext
     public DbSet<ProductModel> Product { get; set; } = null!;
     public DbSet<UserModel> User { get; set; } = null!;
 
-    DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 }

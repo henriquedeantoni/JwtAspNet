@@ -19,6 +19,7 @@ using userJwtApp.Services.Jwt;
 
 Env.Load();
 
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 ILogger logger = new LoggerConfiguration()
@@ -50,7 +51,7 @@ app.UseHttpsRedirection();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    const string connectionString = "server=localhost;port=3306;database=dataBaseName;user=myUser;password=wrongPass;";
+    string connectionString = Environment.GetEnvironmentVariable("MYSQL_CONNECTION")!;;
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
