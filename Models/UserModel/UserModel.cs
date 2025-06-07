@@ -21,7 +21,7 @@ public class UserModel
     public string LastName { get; set; }
     [Required]
     [MaxLength(50)]
-    [Column("UserName")]
+    [Column("Username")]
     public string Username { get; set; }
     [Required]
     [MaxLength(100)]
