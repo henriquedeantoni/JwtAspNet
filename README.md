@@ -29,7 +29,7 @@ Criação das tabelas:
 - Users
 ```
 CREATE TABLE users (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID CHAR(36) NOT NULL PRIMARY KEY,
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50) NOT NULL,
     Username VARCHAR(50) NOT NULL UNIQUE,
@@ -42,7 +42,7 @@ CREATE TABLE users (
 - Products
 ```
 CREATE TABLE Product (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID CHAR(36) NOT NULL PRIMARY KEY,
     ProductName VARCHAR(100) NOT NULL,
     Serial VARCHAR(100) NOT NULL,
     Price DECIMAL(18,2) NOT NULL,
