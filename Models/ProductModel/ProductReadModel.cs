@@ -3,7 +3,7 @@ using userJwtApp.Models.ProductModel;
 
 public class ProductReadModel
 {
-    public int Id { get; init; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string ProductName { get; init; }
     public string Serial { get; init; }
     public decimal Price { get; init; }

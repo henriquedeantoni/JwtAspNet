@@ -9,7 +9,7 @@ public class ProductModel
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Required]
     [Column("ID")]
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required]
     [MaxLength(100)]

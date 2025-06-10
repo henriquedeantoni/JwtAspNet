@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("userJwtApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0efd289d532506ba566714d8977c58bd1785b599")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4eb7b4e910273cbc6570a8194c9bf6debf092ff9")]
 [assembly: System.Reflection.AssemblyProductAttribute("userJwtApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("userJwtApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

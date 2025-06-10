@@ -10,23 +10,28 @@ public class UserModel
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Required]
     [Column("ID")]
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
+
     [Required]
     [MaxLength(50)]
     [Column("FirstName")]
     public string FirstName { get; set; }
+
     [Required]
     [MaxLength(50)]
     [Column("LastName")]
     public string LastName { get; set; }
+
     [Required]
     [MaxLength(50)]
     [Column("Username")]
     public string Username { get; set; }
+
     [Required]
     [MaxLength(100)]
     [Column("Email")]
     public string Email { get; set; }
+    
     [Required]
     [MaxLength(100)]
     [Column("Password")]
