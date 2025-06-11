@@ -17,7 +17,7 @@ public class UserRepository : IUserInterface
         (await dbContext.User.AddAsync(user)).Entity;
 
 
-    public async Task<UserModel> GetUserById(int userId) =>
+    public async Task<UserModel> GetUserById(Guid userId) =>
         (await dbContext.User.FindAsync(userId));
 
     public async Task<UserModel> GetUserByUserName(string username) =>

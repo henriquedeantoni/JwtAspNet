@@ -10,14 +10,14 @@ public interface IProductController
     /// <param name="registerRequestModel"></param>
     /// <param name="userId"></param>
     /// <returns></returns>
-    public Task<int> RegisterProduct(ProductRegisterRequestModel registerRequestModel, int userId);
+    public Task<int> RegisterProduct(ProductRegisterRequestModel registerRequestModel, Guid userId);
 
     /// <summary>
     /// Products registered by User
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
-    public Task<IReadOnlyList<ProductReadModel>> GetUserProducts(int Id);
+    public Task<IReadOnlyList<ProductReadModel>> GetUserProducts(Guid Id);
 
     /// <summary>
     /// Product Update 
@@ -25,12 +25,12 @@ public interface IProductController
     /// <param name="productUpdateRequestModel"></param>
     /// <param name="productId"></param>
     /// <returns></returns>
-    public Task<int> UpdateProduct(ProductUpdateRequestModel productUpdateRequestModel, int productId);
+    public Task<Guid> UpdateProduct(ProductUpdateRequestModel productUpdateRequestModel, Guid productId);
 
     /// <summary>
     /// Product Delete
     /// </summary>
     /// <param name="productId"></param>
     /// <returns></returns>
-    public Task<int> DeleteProduct(int productId);
+    public Task<Guid> DeleteProduct(Guid productId);
 }

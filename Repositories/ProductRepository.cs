@@ -16,10 +16,10 @@ public class ProductRepository : IProductRepository
     public async Task<ProductModel> RegisterProduct(ProductModel product) =>
         (await dbContext.Product.AddAsync(product)).Entity;
 
-    public async Task<ProductModel?> GetProductById(int productId) =>
+    public async Task<ProductModel?> GetProductById(Guid productId) =>
         await dbContext.Product.FindAsync(productId);
 
-    public async Task<IReadOnlyList<ProductModel>> GetUserRelatedProducts(int userId) =>
+    public async Task<IReadOnlyList<ProductModel>> GetUserRelatedProducts(Guid userId) =>
         await dbContext.Product
             .Where(product => product.CreatedBy.Id == userId)
             .OrderBy(product => product.Id)

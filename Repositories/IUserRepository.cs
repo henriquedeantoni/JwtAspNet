@@ -14,7 +14,7 @@ public interface IUserInterface
     /// </summary>
     /// <param name="userId"></param>
     /// <returns></returns>
-    public Task<UserModel?> GetUserById(int userId);
+    public Task<UserModel?> GetUserById(Guid userId);
     /// <summary>
     /// Get User data by user name
     /// </summary>

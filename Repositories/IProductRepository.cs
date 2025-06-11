@@ -15,13 +15,13 @@ public interface IProductRepository
     /// <param name="product"></param>
     /// <param name=""></param>
     /// <returns></returns>
-    public Task<ProductModel> GetProductById(int productId);
+    public Task<ProductModel> GetProductById(Guid productId);
     /// <summary>
     /// Return all products registered by user
     /// </summary>
     /// <param name="userId"></param>
     /// <returns></returns>
-    public Task<IReadOnlyList<ProductModel>> GetUserRelatedProducts(int userId);
+    public Task<IReadOnlyList<ProductModel>> GetUserRelatedProducts(Guid userId);
     /// <summary>
     /// Delete some product 
     /// </summary>
