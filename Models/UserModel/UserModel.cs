@@ -31,9 +31,17 @@ public class UserModel
     [MaxLength(100)]
     [Column("Email")]
     public string Email { get; set; }
-    
+
     [Required]
     [MaxLength(100)]
     [Column("Password")]
     public string Password { get; set; }
+
+    [Required]
+    [Column("CreatedAt")]
+    public DateTime createdAt { get; set; } = DateTime.UtcNow;
+
+    [Required]
+    [Column("Updated")]
+    public DateTime updatedAt { get; set; } = DateTime.UtcNow;
 }
