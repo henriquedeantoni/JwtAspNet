@@ -34,7 +34,7 @@ public class ProductController : IProductController
         this.ProductUpdateValidator = ProductUpdateValidator;
     }
 
-    public async Task<int> RegisterProduct(ProductRegisterRequestModel registerRequestModel, int userId)
+    public async Task<int> RegisterProduct(ProductRegisterRequestModel registerRequestModel, Guid userId)
     {
         #region Validation
         Logger.Information("Validating Product register request");

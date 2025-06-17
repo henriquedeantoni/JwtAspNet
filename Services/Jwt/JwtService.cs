@@ -11,7 +11,7 @@ public class JwtService
     {
         this.simetricKey = simetricKey;
     }
-    public string GenerateToken(int userId)
+    public string GenerateToken(Guid userId)
     {
         JsonWebTokenHandler handler = new();
         string jwt = handler.CreateToken(new SecurityTokenDescriptor
