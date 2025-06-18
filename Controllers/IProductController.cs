@@ -10,7 +10,7 @@ public interface IProductController
     /// <param name="registerRequestModel"></param>
     /// <param name="userId"></param>
     /// <returns></returns>
-    public Task<int> RegisterProduct(ProductRegisterRequestModel registerRequestModel, Guid userId);
+    public Task<Guid> RegisterProduct(ProductRegisterRequestModel registerRequestModel, Guid userId);
 
     /// <summary>
     /// Products registered by User

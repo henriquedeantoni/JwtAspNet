@@ -34,7 +34,7 @@ public class ProductController : IProductController
         this.ProductUpdateValidator = ProductUpdateValidator;
     }
 
-    public async Task<int> RegisterProduct(ProductRegisterRequestModel registerRequestModel, Guid userId)
+    public async Task<Guid> RegisterProduct(ProductRegisterRequestModel registerRequestModel, Guid userId)
     {
         #region Validation
         Logger.Information("Validating Product register request");
@@ -69,7 +69,7 @@ public class ProductController : IProductController
         return newProduct.Id;
     }
 
-    public async Task<IReadOnlyList<ProductReadModel>> GetUserProducts(int userId)
+    public async Task<IReadOnlyList<ProductReadModel>> GetUserProducts(Guid userId)
     {
         #region Validation
 
@@ -94,7 +94,7 @@ public class ProductController : IProductController
     return userProductRead;
     }
 
-    public async Task<int> UpdateProduct(ProductUpdateRequestModel updateRequest, int productId)
+    public async Task<Guid> UpdateProduct(ProductUpdateRequestModel updateRequest, Guid productId)
     {
         #region Validation
 
@@ -142,7 +142,7 @@ public class ProductController : IProductController
         Logger.Information("Product ID[{Id}] updated successfully", productModel.Id);
         return productModel.Id;
     }
-    public async Task<int> DeleteProduct(int productId)
+    public async Task<Guid> DeleteProduct(Guid productId)
     {
         #region Validation
         Logger.Information("Validating product ID[{Id}]", productId);
