@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace userJwtApp.Models.ProductModel;
 using userJwtApp.Models.UserModel;
 
+[Table("Products")]
 public class ProductModel
 {
     [Key]
