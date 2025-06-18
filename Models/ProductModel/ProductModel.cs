@@ -36,6 +36,6 @@ public class ProductModel
 
     [Required]
     [ForeignKey("CreatedBy")]
-    public int CreatedById { get; set; }
+    public Guid CreatedById { get; set; }
     public UserModel CreatedBy { get; set; } // navegação
 }
