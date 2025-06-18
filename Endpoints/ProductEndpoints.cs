@@ -14,7 +14,7 @@ public static class ProductEndpoints
             async (HttpContext context,
             [FromServices] ProductController controller) =>
             {
-                int userClaimId = int.Parse(context.User.Claims
+                Guid userClaimId = Guid.Parse(context.User.Claims
                     .First(claim => claim.Type == JwtConsts.CLAIM_ID).Value);
 
                 IReadOnlyList<ProductReadModel> userProducts;
@@ -35,10 +35,10 @@ public static class ProductEndpoints
             [FromServices] ProductController controller,
             [FromBody] ProductRegisterRequestModel registerRequest) =>
             {
-                int userClaimId = int.Parse(context.User.Claims
+                Guid userClaimId = Guid.Parse(context.User.Claims
                     .First(claim => claim.Type == JwtConsts.CLAIM_ID).Value);
 
-                int newProductId;
+                Guid newProductId;
                 try
                 {
                     newProductId = await controller.RegisterProduct(registerRequest, userClaimId);
@@ -52,13 +52,13 @@ public static class ProductEndpoints
             }
         );
 
-        group.MapPut("{id:int}", async (HttpContext context,
-            [FromRoute] int id,
+        group.MapPut("{id:Guid}", async (HttpContext context,
+            [FromRoute] Guid id,
             [FromServices] ProductController productController,
             [FromBody] ProductUpdateRequestModel updateRequest) =>
         {
 
-            int updatedProductId;
+            Guid updatedProductId;
             try
             {
                 updatedProductId = await productController.UpdateProduct(updateRequest, id);
@@ -74,11 +74,11 @@ public static class ProductEndpoints
             return Results.Ok(updatedProductId);
         });
 
-        group.MapDelete("{id:int}", async (HttpContext context,
-            [FromRoute] int id,
+        group.MapDelete("{id:Guid}", async (HttpContext context,
+            [FromRoute] Guid id,
             [FromServices] ProductController productController) =>
         {
-            int deletedProductId;
+            Guid deletedProductId;
             try
             {
                 deletedProductId = await productController.DeleteProduct(id);

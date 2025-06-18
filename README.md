@@ -27,7 +27,7 @@ PASSWORD=
 
 Esta aplicação foi configurada para trabalhar com o banco de dados mySQL
 
-### Banco de testes
+### Esquemas Banco de testes
 
 Para execução dos testes, utilizar um banco de testes
 
