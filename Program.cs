@@ -31,41 +31,11 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 builder.Host.UseSerilog(logger);
 
-
-/*
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-*/
-
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     string connectionString = Environment.GetEnvironmentVariable("MYSQL_CONNECTION")!;;
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
-
-WebApplication app = builder.Build();
-
-
-using (IServiceScope scope = app.Services.CreateScope())
-{
-    DatabaseContext dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-    dbContext.Database.EnsureCreated();
-}
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<ProductRepository>();
@@ -74,6 +44,9 @@ builder.Services.AddScoped<IValidator<UserSignRequestModel>, UserSignRequestVali
 builder.Services.AddScoped<IValidator<UserLoginRequestModel>, UserLoginRequestValidator>();
 builder.Services.AddScoped<IValidator<ProductRegisterRequestModel>, ProductRegisterRequestValidator>();
 builder.Services.AddScoped<IValidator<ProductUpdateRequestModel>, ProductUpdateRequestValidator>();
+
+builder.Services.AddScoped<UserController>();
+builder.Services.AddScoped<ProductController>();
 
 builder.Services.AddSingleton<JwtService>(_ =>
 {
@@ -96,16 +69,29 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(byteKey),
-        ValidAlgorithms = new[] { SecurityAlgorithms.HmacSha256Signature }
+        ValidIssuer = JwtConsts.JWT_ISSUER,
+        ValidateAudience = false
     };
 });
+builder.Services.AddAuthorization();
 
-RouteGroupBuilder productGroup = app.MapGroup("Product")
+builder.Services.AddEndpointsApiExplorer();
+
+WebApplication app = builder.Build();
+
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    DatabaseContext dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    dbContext.Database.EnsureCreated();
+}
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+RouteGroupBuilder productGroup = app.MapGroup("product")
     .RequireAuthorization(policyBuilder => policyBuilder.RequireClaim(JwtConsts.CLAIM_ID));
 
 RouteGroupBuilder userGroup = app.MapGroup("user")
     .AllowAnonymous();
 
-builder.Services.AddScoped<UserController>();
-builder.Services.AddScoped<ProductController>();
-
+app.Run();
