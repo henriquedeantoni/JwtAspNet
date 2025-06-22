@@ -21,7 +21,8 @@ public class UserSignRequestValidator : AbstractValidator<UserSignRequestModel>
             .MaximumLength(100);
         RuleFor(model => model.Password)
             .NotNull()
-            .NotEmpty();
+            .NotEmpty()
+            .GreaterThanOrEqualTo("8");
         RuleFor(model => model.Email)
             .NotNull()
             .EmailAddress()
