@@ -7,6 +7,7 @@ public class ProductReadModel
     public string ProductName { get; init; }
     public string Serial { get; init; }
     public decimal Price { get; init; }
+    public bool Active { get; init; }
     public static ProductReadModel FromProductModel(ProductModel productModel) => new()
     {
         Id = productModel.Id,

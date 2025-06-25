@@ -27,6 +27,10 @@ public class ProductModel
     public decimal Price { get; set; }
 
     [Required]
+    [Column("Active")]
+    public bool Active { get; set; }
+    
+    [Required]
     [Column("CreatedAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

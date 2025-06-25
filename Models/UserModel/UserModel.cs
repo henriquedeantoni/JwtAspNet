@@ -38,6 +38,10 @@ public class UserModel
     public string Password { get; set; }
 
     [Required]
+    [Column("Active")]
+    public bool Active { get; set; } = true;
+
+    [Required]
     [Column("CreatedAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

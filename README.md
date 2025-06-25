@@ -67,7 +67,7 @@ CREATE TABLE Products (
 
 A Injeção de dependência foi feita através de construtores que são injetados nas classes. Na aplicação esta sendo usado o tempo de vida do tipo scoped, ou seja, o serviço será criado apenas uma vez por requisição. Será uma nova instância dos serviços a cada requisição.
 
-A interface ```IClientController``` define os métodos que os serviços irão usar.
+A interface ```IProductController``` define os métodos que os serviços irão usar.
 
 
 
