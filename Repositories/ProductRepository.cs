@@ -19,6 +19,11 @@ public class ProductRepository : IProductRepository
     public async Task<ProductModel?> GetProductById(Guid productId) =>
         await dbContext.Product.FindAsync(productId);
 
+    public async Task<List<ProductModel>> GetProductByMonth(int month, int year) =>
+        await dbContext.Product
+        .Where(p => p.CreatedAt.Month == month && p.CreatedAt.Year == year)
+        .ToListAsync();
+
     public async Task<IReadOnlyList<ProductModel>> GetUserRelatedProducts(Guid userId) =>
         await dbContext.Product
             .Where(product => product.CreatedBy.Id == userId)

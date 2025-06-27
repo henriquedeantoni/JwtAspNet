@@ -5,6 +5,7 @@ public class UserSignRequestModel
     public string Username { get; init; }
     public string Email { get; init; }
     public string Password{ get; init; }
+    public bool Active { get; set; }
     public DateTime createdAt { get; set; }
     public DateTime updatedAt { get; set; }
 }
