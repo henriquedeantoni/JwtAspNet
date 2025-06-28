@@ -18,6 +18,7 @@ public class ProductController : IProductController
     private ILogger Logger { get; }
     private IValidator<ProductRegisterRequestModel> ProductRegisterValidator { get; }
     private IValidator<ProductUpdateRequestModel> ProductUpdateValidator { get; }
+    private IValidator<DateTime> DateTimeValidator { get; }
 
     public ProductController(
         ProductRepository Repository,
@@ -97,8 +98,22 @@ public class ProductController : IProductController
     public async Task<IReadOnlyList<ProductModel>> GetProductByDate(DateTime date)
     {
         #region Validation
-        Logger.Information("Validation product request");
-        
+        Logger.Information("Validation date request");
+        ValidationResult validationResult = await DateTimeValidator.ValidateAsync(date);
+        if (date.Kind != DateTimeKind.Utc)
+        {
+            InvalidRequestInfoException invalidRequestInfoException = new(validationResult.Errors
+            .Select(e => e.ErrorMessage));
+            Logger.Error("Invalid date format, date must be utc kind, {date}", date);
+            throw invalidRequestInfoException;
+        }
+        #endregion
+
+        #region Get product by date
+        Logger.Information("Getting products by Month with {date}", date);
+        var monthDate = date.Month;
+
+        return null;
         #endregion
     }
 

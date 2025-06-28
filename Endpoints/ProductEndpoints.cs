@@ -8,7 +8,7 @@ namespace userJwtApp.Endpoints;
 
 public static class ProductEndpoints
 {
-    public static RouteGroupBuilder MapClientEndpoints(this RouteGroupBuilder group)
+    public static RouteGroupBuilder MapProductEndpoints(this RouteGroupBuilder group)
     {
         group.MapGet("/",
             async (HttpContext context,
@@ -30,6 +30,24 @@ public static class ProductEndpoints
                 return Results.Ok(userProducts);
             }
         );
+
+        group.MapGet("/",
+        async (HttpContext context,
+            [FromQuery] DateTime date, 
+            [FromServices] ProductController controller) =>
+            {
+                IReadOnlyList<ProductReadModel> productsListDate;
+                try
+                {
+                    productsListDate
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+        );
+
         group.MapPost("/",
          async (HttpContext context,
             [FromServices] ProductController controller,
