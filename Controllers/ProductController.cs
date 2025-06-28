@@ -94,6 +94,14 @@ public class ProductController : IProductController
     return userProductRead;
     }
 
+    public async Task<IReadOnlyList<ProductModel>> GetProductByDate(DateTime date)
+    {
+        #region Validation
+        Logger.Information("Validation product request");
+        
+        #endregion
+    }
+
     public async Task<Guid> UpdateProduct(ProductUpdateRequestModel updateRequest, Guid productId)
     {
         #region Validation
