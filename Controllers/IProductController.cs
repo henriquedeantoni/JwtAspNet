@@ -28,6 +28,13 @@ public interface IProductController
     public Task<Guid> UpdateProduct(ProductUpdateRequestModel productUpdateRequestModel, Guid productId);
 
     /// <summary>
+    /// Product List By date
+    /// </summary>
+    /// <param name="date"></param>
+    /// <returns></returns>
+    public Task<IReadOnlyList<ProductReadModel>> GetProductByDate(DateTime date);
+
+    /// <summary>
     /// Product Delete
     /// </summary>
     /// <param name="productId"></param>

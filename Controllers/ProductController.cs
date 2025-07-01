@@ -109,11 +109,21 @@ public class ProductController : IProductController
         }
         #endregion
 
-        #region Get product by date
+       #region Get product by date
         Logger.Information("Getting products by Month with {date}", date);
-        var monthDate = date.Month;
+        var month = date.Month;
+        var year = date.Year;
 
-        return null;
+        IReadOnlyList<ProductModel> products = await Repository.GetProductsByMonth(month, year);
+
+        if (products == null || !products.Any())
+        {
+            Logger.Warning("No products found for Month {Month} and Year {Year}", month, year);
+            return new List<ProductModel>();
+        }
+
+        Logger.Information("Found {Count} products for Month {Month} and Year {Year}", products.Count, month, year);
+        return products;
         #endregion
     }
 
