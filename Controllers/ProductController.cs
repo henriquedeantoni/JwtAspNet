@@ -95,7 +95,7 @@ public class ProductController : IProductController
     return userProductRead;
     }
 
-    public async Task<IReadOnlyList<ProductModel>> GetProductByDate(DateTime date)
+    public async Task<IReadOnlyList<ProductReadModel>> GetProductByDate(DateTime date)
     {
         #region Validation
         Logger.Information("Validation date request");

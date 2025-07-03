@@ -39,12 +39,14 @@ public static class ProductEndpoints
                 IReadOnlyList<ProductReadModel> productsListDate;
                 try
                 {
-                    productsListDate
+                    productsListDate = await controller.GetProductByDate(date);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e is InvalidRequestInfoException or UserNotFoundException)
                 {
-
+                    return Results.BadRequest(e.Message);
                 }
+
+                return Results.Ok(productsListDate);
             }
         );
 
