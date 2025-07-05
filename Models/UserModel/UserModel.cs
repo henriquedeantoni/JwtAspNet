@@ -43,6 +43,10 @@ public class UserModel
 
     [Required]
     [Column("CreatedAt")]
+    public DateTime BirthDate { get; set; } = DateTime.UtcNow;
+
+    [Required]
+    [Column("CreatedAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     [Required]
