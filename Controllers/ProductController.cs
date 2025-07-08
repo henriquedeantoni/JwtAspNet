@@ -114,12 +114,12 @@ public class ProductController : IProductController
         var month = date.Month;
         var year = date.Year;
 
-        IReadOnlyList<ProductModel> products = await Repository.GetProductsByMonth(month, year);
+        IReadOnlyList<ProductReadModel> products = await Repository.GetProductByMonth(month, year);
 
         if (products == null || !products.Any())
         {
             Logger.Warning("No products found for Month {Month} and Year {Year}", month, year);
-            return new List<ProductModel>();
+            return Array.Empty<ProductReadModel>();
         }
 
         Logger.Information("Found {Count} products for Month {Month} and Year {Year}", products.Count, month, year);
