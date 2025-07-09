@@ -8,13 +8,14 @@ public class ProductReadModel
     public string Serial { get; init; }
     public decimal Price { get; init; }
     public bool Active { get; init; }
-        public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
     public static ProductReadModel FromProductModel(ProductModel productModel) => new()
     {
         Id = productModel.Id,
         ProductName = productModel.ProductName,
         Serial = productModel.Serial,
-        Price = productModel.Price
+        Price = productModel.Price,
+        Active = productModel.Active,
+        CreatedAt = productModel.CreatedAt,
     };
 }
