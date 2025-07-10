@@ -1,4 +1,4 @@
-using userJwtApp.Models.ProductModel;
+using userJwtApp.Models.ProductModels;
 
 
 public class ProductReadModel

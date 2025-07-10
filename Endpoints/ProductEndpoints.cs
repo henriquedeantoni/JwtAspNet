@@ -1,6 +1,6 @@
 using userJwtApp.Controllers;
 using userJwtApp.Exceptions;
-using userJwtApp.Models.ProductModel;
+using userJwtApp.Models.ProductModels;
 using userJwtApp.Services.Jwt;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +36,7 @@ public static class ProductEndpoints
             [FromQuery] DateTime date, 
             [FromServices] ProductController controller) =>
             {
-                IReadOnlyList<ProductReadModel> productsListDate;
+                IReadOnlyList<ProductModel> productsListDate;
                 try
                 {
                     productsListDate = await controller.GetProductByDate(date);

@@ -4,7 +4,7 @@ using userJwtApp.Services.Jwt;
 using userJwtApp.Repositories;
 using userJwtApp.Models.Controllers;
 using userJwtApp.Validators.ProductValidators;
-using userJwtApp.Models.ProductModel;
+using userJwtApp.Models.ProductModels;
 using userJwtApp.Models.UserModel;
 using FluentValidation;
 using FluentValidation.Results;
@@ -95,7 +95,7 @@ public class ProductController : IProductController
     return userProductRead;
     }
 
-    public async Task<IReadOnlyList<ProductReadModel>> GetProductByDate(DateTime date)
+    public async Task<IReadOnlyList<ProductModel>> GetProductByDate(DateTime date)
     {
         #region Validation
         Logger.Information("Validation date request");
@@ -114,12 +114,12 @@ public class ProductController : IProductController
         var month = date.Month;
         var year = date.Year;
 
-        IReadOnlyList<ProductReadModel> products = await Repository.GetProductByMonth(month, year);
+        IReadOnlyList<ProductModel> products = await Repository.GetProductByMonth(month, year);
 
         if (products == null || !products.Any())
         {
             Logger.Warning("No products found for Month {Month} and Year {Year}", month, year);
-            return Array.Empty<ProductReadModel>();
+            return Array.Empty<ProductModel>();
         }
 
         Logger.Information("Found {Count} products for Month {Month} and Year {Year}", products.Count, month, year);

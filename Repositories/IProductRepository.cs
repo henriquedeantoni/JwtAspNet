@@ -1,4 +1,4 @@
-using userJwtApp.Models.ProductModel;
+using userJwtApp.Models.ProductModels;
 
 namespace userJwtApp.Repositories;
 public interface IProductRepository
@@ -24,7 +24,7 @@ public interface IProductRepository
     /// <param name="month"></param>
     /// <param name="year"></param>
     /// <returns></returns>
-    public Task<IReadOnlyList<ProductReadModel>> GetProductByMonth(int month, int year);
+    public Task<IReadOnlyList<ProductModel>> GetProductByMonth(int month, int year);
 
     /// <summary>
     /// Return all products registered by year integer

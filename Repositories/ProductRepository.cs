@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using userJwtApp.Repositories;
 using userJwtApp.Repositories.Contexts;
-using userJwtApp.Models.ProductModel;
+using userJwtApp.Models.ProductModels;
 
 namespace userJwtApp.Repositories;
 public class ProductRepository : IProductRepository
@@ -19,7 +19,7 @@ public class ProductRepository : IProductRepository
     public async Task<ProductModel?> GetProductById(Guid productId) =>
         await dbContext.Product.FindAsync(productId);
 
-    public async Task<IReadOnlyList<ProductReadModel>> GetProductByMonth(int month, int year) =>
+    public async Task<IReadOnlyList<ProductModel>> GetProductByMonth(int month, int year) =>
         await dbContext.Product
         .Where(p => p.CreatedAt.Month == month && p.CreatedAt.Year == year)
         .ToListAsync();

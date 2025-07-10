@@ -1,4 +1,4 @@
-using userJwtApp.Models.ProductModel;
+using userJwtApp.Models.ProductModels;
 
 namespace userJwtApp.Models.Controllers;
 
@@ -32,7 +32,7 @@ public interface IProductController
     /// </summary>
     /// <param name="date"></param>
     /// <returns></returns>
-    public Task<IReadOnlyList<ProductReadModel>> GetProductByDate(DateTime date);
+    public Task<IReadOnlyList<ProductModel>> GetProductByDate(DateTime date);
 
     /// <summary>
     /// Product Delete
