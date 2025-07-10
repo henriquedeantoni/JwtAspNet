@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using userJwtApp.Models.UserModel;
+using userJwtApp.Models.UserModels;
 using userJwtApp.Repositories;
 using userJwtApp.Repositories.Contexts;
 

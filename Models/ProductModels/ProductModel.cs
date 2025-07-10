@@ -1,7 +1,7 @@
 namespace userJwtApp.Models.ProductModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using userJwtApp.Models.UserModel;
+using userJwtApp.Models.UserModels;
 
 [Table("Products")]
 public class ProductModel

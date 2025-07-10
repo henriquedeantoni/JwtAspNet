@@ -1,5 +1,5 @@
 
-using userJwtApp.Models.UserModel;
+using userJwtApp.Models.UserModels;
 
 public class UserReadModel
 {

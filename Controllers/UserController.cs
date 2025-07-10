@@ -4,11 +4,10 @@ using userJwtApp.Services.Jwt;
 using userJwtApp.Repositories;
 using userJwtApp.Models.Controllers;
 using userJwtApp.Validators.UserValidators;
-using userJwtApp.Models.UserModel;
+using userJwtApp.Models.UserModels;
 using FluentValidation;
 using FluentValidation.Results;
 namespace userJwtApp.Controllers;
-
 
 public class UserController : IUserController
 {

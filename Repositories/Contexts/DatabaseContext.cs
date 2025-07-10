@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using userJwtApp.Models.ProductModel;
-using userJwtApp.Models.UserModel;
+using userJwtApp.Models.ProductModels;
+using userJwtApp.Models.UserModels;
 
 namespace userJwtApp.Repositories.Contexts;
 

@@ -5,7 +5,7 @@ using userJwtApp.Repositories;
 using userJwtApp.Models.Controllers;
 using userJwtApp.Validators.ProductValidators;
 using userJwtApp.Models.ProductModels;
-using userJwtApp.Models.UserModel;
+using userJwtApp.Models.UserModels;
 using FluentValidation;
 using FluentValidation.Results;
 

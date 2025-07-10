@@ -1,4 +1,4 @@
-using userJwtApp.Models.UserModel;
+using userJwtApp.Models.UserModels;
 
 namespace userJwtApp.Models.Controllers;
 
