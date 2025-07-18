@@ -1,5 +1,5 @@
 using FluentValidation;
-using userJwtApp.Models.ProductModel;
+using userJwtApp.Models.ProductModels;
 
 namespace userJwtApp.Validators.ProductValidators;
 
